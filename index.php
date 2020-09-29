@@ -7,6 +7,17 @@ ini_set("display_errors", 1);
 ini_set("display_startup_errors", 1);
 error_reporting(E_ALL);
 
+/*
+// a new dom object
+$dom = new DOMDocument();
+
+// load the html into the object
+$dom->loadHTML('filename.html');
+
+// discard white space
+$dom->preserveWhiteSpace = false;
+*/
+
 $pokemon = $_POST['id'];
 
 if ($pokemon === null) {
@@ -44,12 +55,13 @@ function fourMoves ($data)
           $rand = floor(rand(0, $maxMoves));
             array_push($moves, $data['moves'][$rand]['move']['name']);
         }
-    var_dump($moves);
+        var_dump($moves);
 }
 
 fourMoves($data);
 
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -63,8 +75,8 @@ fourMoves($data);
 <body>
 
 <form action="index.php" method="post">
-Name or Id: <input type="text" name="id">
-<input type="submit">
+    Name or Id: <input type="text" name="id">
+    <input type="submit">
 </form>
 
 <img src="<?php echo $data['sprites']['front_default'];?>" alt="frontPoke">
@@ -76,13 +88,14 @@ Name or Id: <input type="text" name="id">
 <div id="pokeAbility" class="pokeAbility">Special Ability: <?php echo $data['abilities'][0]['ability']['name'];?></div>
 
 <div class="pokeMoveSet">
-    <div id="move-one" class="move-one"><?php echo fourMoves($data)?></div>
-    <div id="move-two" class="move-two"><?php echo $data['moves'][1]['move']['name'];?></div>
-    <div id="move-three" class="move-three"><?php echo $data['moves'][2]['move']['name'];?></div>
-    <div id="move-four" class="move-four"> <?php echo $data['moves'][3]['move']['name'];?></div>
+    <div id="move-one" class="moves"><?php echo fourMoves($data)?></div>
+    <div id="move-two" class="moves"><?php echo $data['moves'][1]['move']['name'];?></div>
+    <div id="move-three" class="moves"><?php echo $data['moves'][2]['move']['name'];?></div>
+    <div id="move-four" class="moves"> <?php echo $data['moves'][3]['move']['name'];?></div>
 </div>
 
 <div id="evolutionChain" class="evolutionChain">
-<!--<img src="?php echo $dataEvo['sprites']['front_default'];?"</div>-->
+    <!--<img src="?php echo $dataEvo['sprites']['front_default'];?"</div>-->
 </body>
 </html>
+
