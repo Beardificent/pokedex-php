@@ -16,16 +16,31 @@ if ($pokemon === null) {
 $getPokemon = file_get_contents('https://pokeapi.co/api/v2/pokemon/'. $pokemon);
 $data = (json_decode($getPokemon, 1));
 
+
+if ($data['id'] < 10) {
+  $pokeId =  "#00" . $data['id'];
+
+} else if ($data['id'] < 100) {
+  $pokeId =  "#0" . $data['id'];
+} else {
+   $pokeId = "#" . $data['id'];
+}
+
 $getEvolutions = file_get_contents('https://pokeapi.co/api/v2/evolution-chain/'. $pokemon);
 $dataEvo = (json_decode($getEvolutions, 1));
 
 
 //echo "\n".$data['abilities'][1]['ability']['name'];
+/*
+
+function fourMoves ($data) {
+    $moves = ();
+    $maxMoves = count($data['moves']);
+    echo rand($maxMoves, $minMoves);
+}
 
 
-
-
-
+*/
 
 
 
@@ -48,9 +63,12 @@ Name or Id: <input type="text" name="id">
 <input type="submit">
 </form>
 
-<img src="<?php echo $data['sprites']['front_default'];?>">
-<img src="<?php echo $data['sprites']['back_default'];?>">
+<img src="<?php echo $data['sprites']['front_default'];?>" alt="frontPoke">
+<img src="<?php echo $data['sprites']['back_default'];?>" alt="backPoke">
 <div id="pokeName" class="pokeName">Name: <?php echo $data['name'];?></div>
+<div id="pokeId" class="pokeId"><?php echo $pokeId;?></div>
+
+
 <div id="pokeAbility" class="pokeAbility">Special Ability: <?php echo $data['abilities'][0]['ability']['name'];?></div>
 
 <div class="pokeMoveSet">
