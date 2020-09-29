@@ -7,19 +7,60 @@ ini_set("display_errors", 1);
 ini_set("display_startup_errors", 1);
 error_reporting(E_ALL);
 
-/*
-if (empty($_GET['pokemon'])){
-    $formData = file_get_contents();
-    $formDataSpecies = file_get_contents('https://pokeapi.co/api/v2/type/10/');
-} else {
-    $formData = file_get_contents('https://pokeapi.co/api/v2/pokemon');
-    $formDataSpecies = file_get_contents('https://pokeapi.co/api/v2/type');
+$pokemon = $_POST['id'];
+
+if ($pokemon === null) {
+    $pokemon = 1;
 }
-$base = 'https://pokeapi.co/api/v2/pokemon';
-$input = '';
-*/
 
-$jsonobj = file_get_contents('https://pokeapi.co/api/v2/pokemon/' . $_GET['id']);
-var_dump(json_decode($jsonobj));
-echo $jsonobj;
+$getPokemon = file_get_contents('https://pokeapi.co/api/v2/pokemon/'. $pokemon);
+$data = (json_decode($getPokemon, 1));
 
+$getEvolutions = file_get_contents('https://pokeapi.co/api/v2/evolution-chain/'. $pokemon);
+$dataEvo = (json_decode($getEvolutions, 1));
+
+
+//echo "\n".$data['abilities'][1]['ability']['name'];
+
+
+
+
+
+
+
+
+
+?>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css" >
+    <title>Dex PHP</title>
+</head>
+<body>
+
+<form action="index.php" method="post">
+Name or Id: <input type="text" name="id">
+<input type="submit">
+</form>
+
+<img src="<?php echo $data['sprites']['front_default'];?>">
+<img src="<?php echo $data['sprites']['back_default'];?>">
+<div id="pokeName" class="pokeName">Name: <?php echo $data['name'];?></div>
+<div id="pokeAbility" class="pokeAbility">Special Ability: <?php echo $data['abilities'][0]['ability']['name'];?></div>
+
+<div class="pokeMoveSet">
+    <div id="move-one" class="move-one"><?php echo $data['moves'][0]['move']['name'];?></div>
+    <div id="move-two" class="move-two"><?php echo $data['moves'][1]['move']['name'];?></div>
+    <div id="move-three" class="move-three"><?php echo $data['moves'][2]['move']['name'];?></div>
+    <div id="move-four" class="move-four"> <?php echo $data['moves'][3]['move']['name'];?></div>
+</div>
+
+<div id="evolutionChain" class="evolutionChain">
+<!--<img src="?php echo $dataEvo['sprites']['front_default'];?"</div>-->
+</body>
+</html>
