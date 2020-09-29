@@ -42,23 +42,23 @@ if ($data['id'] < 10) {
 //tried getting evolotions but doesn't work.
 $getEvolutions = file_get_contents('https://pokeapi.co/api/v2/evolution-chain/'. $pokemon);
 $dataEvo = (json_decode($getEvolutions, true));
+$evoChain = array ();
+
 
 
 
 
 //Random moves generator (max 4) no idea how to print this value as a single to body. appendchild maybe?
-function fourMoves ($data)
-{
+
     $moves = array();
     $maxMoves = count($data['moves']);
         for ($i = 0; $i < 4; $i++){
           $rand = floor(rand(0, $maxMoves));
             array_push($moves, $data['moves'][$rand]['move']['name']);
         }
-        var_dump($moves);
-}
 
-fourMoves($data);
+
+
 
 ?>
 
@@ -88,10 +88,10 @@ fourMoves($data);
 <div id="pokeAbility" class="pokeAbility">Special Ability: <?php echo $data['abilities'][0]['ability']['name'];?></div>
 
 <div class="pokeMoveSet">
-    <div id="move-one" class="moves"><?php echo fourMoves($data)?></div>
-    <div id="move-two" class="moves"><?php echo $data['moves'][1]['move']['name'];?></div>
-    <div id="move-three" class="moves"><?php echo $data['moves'][2]['move']['name'];?></div>
-    <div id="move-four" class="moves"> <?php echo $data['moves'][3]['move']['name'];?></div>
+    <div id="move-one" class="moves"><?php echo $moves[0]?></div>
+    <div id="move-two" class="moves"><?php echo $moves[1];?></div>
+    <div id="move-three" class="moves"><?php echo $moves[2];?></div>
+    <div id="move-four" class="moves"> <?php echo $moves[3];?></div>
 </div>
 
 <div id="evolutionChain" class="evolutionChain">
