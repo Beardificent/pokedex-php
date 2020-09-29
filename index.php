@@ -31,18 +31,18 @@ $dataEvo = (json_decode($getEvolutions, 1));
 
 
 //echo "\n".$data['abilities'][1]['ability']['name'];
-/*
 
-function fourMoves ($data) {
-    $moves = ();
+
+function fourMoves ($data)
+{
+    $moves = array();
     $maxMoves = count($data['moves']);
-    echo rand($maxMoves, $minMoves);
+        for ($i = 0; $i < 4; $i++){
+          $rand = floor(rand(0, $maxMoves));
+            array_push($moves, $data['moves'][$rand]['move']['name']);
+        }
+
 }
-
-
-*/
-
-
 
 
 ?>
