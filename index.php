@@ -1,6 +1,6 @@
 <?php
 
-//declare(strict_types=1);
+declare(strict_types=0);
 //DISPLAY ERROR HANDLING
 
 ini_set("display_errors", 1);
@@ -19,6 +19,7 @@ $dom->preserveWhiteSpace = false;
 */
 
 $pokemon = $_POST['id'];
+
 
 if ($pokemon === null) {
     $pokemon = 1;
@@ -78,22 +79,19 @@ $evoChain = array ();
     Name or Id: <input type="text" name="id">
     <input type="submit">
 </form>
-
+<div class="pokeInfo">
 <img src="<?php echo $data['sprites']['front_default'];?>" alt="frontPoke">
 <img src="<?php echo $data['sprites']['back_default'];?>" alt="backPoke">
-<div id="pokeName" class="pokeName">Name: <?php echo $data['name'];?></div>
 <div id="pokeId" class="pokeId"><?php echo $pokeId;?></div>
-
-
+<div id="pokeName" class="pokeName">Name: <?php echo $data['name'];?></div>
 <div id="pokeAbility" class="pokeAbility">Special Ability: <?php echo $data['abilities'][0]['ability']['name'];?></div>
-
 <div class="pokeMoveSet">
     <div id="move-one" class="moves"><?php echo $moves[0]?></div>
     <div id="move-two" class="moves"><?php echo $moves[1];?></div>
     <div id="move-three" class="moves"><?php echo $moves[2];?></div>
     <div id="move-four" class="moves"> <?php echo $moves[3];?></div>
 </div>
-
+</div>
 <div id="evolutionChain" class="evolutionChain">
     <!--<img src="?php echo $dataEvo['sprites']['front_default'];?"</div>-->
 </body>
