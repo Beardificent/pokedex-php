@@ -47,7 +47,7 @@ $getSpecies = file_get_contents('https://pokeapi.co/api/v2/pokemon-species/' . $
 $dataSpecies = (json_decode($getSpecies, True));
 $flavorText = $dataSpecies['flavor_text_entries'][0]['flavor_text'];
 
-//tried getting evolotions but doesn't work.
+//works for bulbasaur (displays next evolution names) but bricks as soon as ivysaur
 $getEvolutions = file_get_contents('https://pokeapi.co/api/v2/evolution-chain/' . $pokemon);
 $dataEvo = (json_decode($getEvolutions, True));
 $evoChainOne = $dataEvo['chain']['evolves_to'][0]['species']['name'];
