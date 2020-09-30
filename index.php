@@ -62,7 +62,7 @@ $dataEvo = (json_decode($getEvolutions, True));
 $dataEvoCopy = $dataEvo['chain'];
 $evoArr = array();
 
-//push evolution data into array while there is an array to add. if not it stops looking. Xander helped me with this one! will look up later!
+//DOWHILE push evolution data into array while there is an array to add. if not it stops looking. Xander helped me with this one! will look up later!
 do {
     array_push($evoArr, $dataEvoCopy['species']['name']);
     if($dataEvoCopy['evolves_to']){
@@ -72,19 +72,19 @@ do {
     }
 
 } while (!!$dataEvoCopy);
+var_dump($evoArr[0]);
+var_dump($evoArr[1]);
+var_dump($evoArr[2]);
 
-/*for($x= 0; $x < $evoArr.length; $x++){
-
-}
-*/
-//$evoCount = count($dataEvo['evolves_to']);
 /*
- * $evoChainOne = $dataEvo['chain']['evolves_to'][0]['species']['name'];
+for ($i = 0; $i < count($evoArr); $i++) {
+    echo $evoArr[$i]['species']['name'];
+}
+
+$evoChainOne = $dataEvo['chain']['evolves_to'][0]['species']['name'];
 $evoChainTwo = $dataEvo['chain']['evolves_to'][0]['evolves_to'][0]['species']['name'];
 */
 
-//$evoSprite = file_get_contents('https://pokeapi.co/api/v2/pokemon/' . $evoChainOne);
-//$evoImage = json_decode($evoSprite, True);
 
 
 //Random moves generator (max 4)
