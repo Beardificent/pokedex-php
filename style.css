@@ -4,6 +4,7 @@ html {
 }
 
 .pokeSprite-Wrapper {
+    position: relative;
     background-color: whitesmoke;
     line-height: 20px;
     max-width: 200px;
@@ -15,8 +16,10 @@ html {
     text-transform: capitalize;
 }
 
-.pokeId {
-
+#pokeId {
+    position: absolute;
+    right: 0;
+    font-size: smaller;
 }
 
 #pokeName {
@@ -44,13 +47,15 @@ html {
 .type-two {
 
 }
-.pokeAbility-wrapper{
+
+.pokeAbility-wrapper {
     margin-left: 10px;
 }
 
-.pokeMove-wrapper{
+.pokeMove-wrapper {
     margin-left: 10px;
 }
+
 .evolutionChain {
     background-color: whitesmoke;
 }
