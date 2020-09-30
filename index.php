@@ -29,6 +29,8 @@ if ($pokemon === null) {
 
 $getPokemon = file_get_contents('https://pokeapi.co/api/v2/pokemon/'. $pokemon);
 $data = (json_decode($getPokemon, true));
+$pokeTypeOne = $data['types'][0]['type']['name'];
+$pokeTypeTwo = $data['types'][1]['type']['name'];
 
 //IF STATEMENT TO REPLACE PADSTART(0, 3)
 if ($data['id'] < 10) {
@@ -40,10 +42,15 @@ if ($data['id'] < 10) {
    $pokeId = "#" . $data['id'];
 }
 
+//Fetch for species
+$getSpecies = file_get_contents('https://pokeapi.co/api/v2/pokemon-species/' . $pokemon);
+$dataSpecies = (json_decode($getSpecies, True));
+$flavorText = $dataSpecies['flavor_text_entries'][0]['flavor_text'];
+
 //tried getting evolotions but doesn't work.
 $getEvolutions = file_get_contents('https://pokeapi.co/api/v2/evolution-chain/'. $pokemon);
-$dataEvo = (json_decode($getEvolutions, true));
-$evoChain = array ();
+$dataEvo = (json_decode($getEvolutions, True));
+//$evoChain = $dataEvo['chain']['evolves_to'][0]['evolution_details']
 
 
 
@@ -83,9 +90,14 @@ $evoChain = array ();
 <img src="<?php echo $data['sprites']['front_default'];?>" alt="frontPoke">
 <img src="<?php echo $data['sprites']['back_default'];?>" alt="backPoke">
 <div id="pokeId" class="pokeId"><?php echo $pokeId;?></div>
-<div id="pokeName" class="pokeName">Name: <?php echo $data['name'];?></div>
+<div id="pokeName" class="pokeName">Name: <?php echo $data['species']['name'];?></div>
+    <div class="pokeType-wrapper">
+    <div id="type-one" class="pokeType"><?php echo $pokeTypeOne;?></div>
+    <div id="type-two" class="pokeType"><?php echo $pokeTypeTwo;?></div>
+    </div>
+    <div id="descrip" class="flavortext"><?php echo $flavorText;?></div>
 <div id="pokeAbility" class="pokeAbility">Special Ability: <?php echo $data['abilities'][0]['ability']['name'];?></div>
-<div class="pokeMoveSet">
+<div class="pokeMove-wrapper">
     <div id="move-one" class="moves"><?php echo $moves[0]?></div>
     <div id="move-two" class="moves"><?php echo $moves[1];?></div>
     <div id="move-three" class="moves"><?php echo $moves[2];?></div>
