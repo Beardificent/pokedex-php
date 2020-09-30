@@ -27,19 +27,19 @@ if ($pokemon === null) {
 
 //FETCH POKE API
 
-$getPokemon = file_get_contents('https://pokeapi.co/api/v2/pokemon/'. $pokemon);
+$getPokemon = file_get_contents('https://pokeapi.co/api/v2/pokemon/' . $pokemon);
 $data = (json_decode($getPokemon, true));
 $pokeTypeOne = $data['types'][0]['type']['name'];
 $pokeTypeTwo = $data['types'][1]['type']['name'];
 
 //IF STATEMENT TO REPLACE PADSTART(0, 3)
 if ($data['id'] < 10) {
-  $pokeId =  "#00" . $data['id'];
+    $pokeId = "#00" . $data['id'];
 
 } else if ($data['id'] < 100) {
-  $pokeId =  "#0" . $data['id'];
+    $pokeId = "#0" . $data['id'];
 } else {
-   $pokeId = "#" . $data['id'];
+    $pokeId = "#" . $data['id'];
 }
 
 //Fetch for species
@@ -48,24 +48,19 @@ $dataSpecies = (json_decode($getSpecies, True));
 $flavorText = $dataSpecies['flavor_text_entries'][0]['flavor_text'];
 
 //tried getting evolotions but doesn't work.
-$getEvolutions = file_get_contents('https://pokeapi.co/api/v2/evolution-chain/'. $pokemon);
+$getEvolutions = file_get_contents('https://pokeapi.co/api/v2/evolution-chain/' . $pokemon);
 $dataEvo = (json_decode($getEvolutions, True));
-//$evoChain = $dataEvo['chain']['evolves_to'][0]['evolution_details']
-
-
-
-
+$evoChainOne = $dataEvo['chain']['evolves_to'][0]['species']['name'];
+$evoChainTwo = $dataEvo['chain']['evolves_to'][0]['evolves_to'][0]['species']['name'];
 
 //Random moves generator (max 4) no idea how to print this value as a single to body. appendchild maybe?
 
-    $moves = array();
-    $maxMoves = count($data['moves']);
-        for ($i = 0; $i < 4; $i++){
-          $rand = floor(rand(0, $maxMoves));
-            array_push($moves, $data['moves'][$rand]['move']['name']);
-        }
-
-
+$moves = array();
+$maxMoves = count($data['moves']);
+for ($i = 0; $i < 4; $i++) {
+    $rand = floor(rand(0, $maxMoves));
+    array_push($moves, $data['moves'][$rand]['move']['name']);
+}
 
 
 ?>
@@ -77,7 +72,7 @@ $dataEvo = (json_decode($getEvolutions, True));
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css" >
+    <link rel="stylesheet" href="style.css">
     <title>Dex PHP</title>
 </head>
 <body>
@@ -87,25 +82,33 @@ $dataEvo = (json_decode($getEvolutions, True));
     <input type="submit">
 </form>
 <div class="pokeInfo">
-<img src="<?php echo $data['sprites']['front_default'];?>" alt="frontPoke">
-<img src="<?php echo $data['sprites']['back_default'];?>" alt="backPoke">
-<div id="pokeId" class="pokeId"><?php echo $pokeId;?></div>
-<div id="pokeName" class="pokeName">Name: <?php echo $data['species']['name'];?></div>
+    <img src="<?php echo $data['sprites']['front_default']; ?>" alt="frontPoke">
+    <img src="<?php echo $data['sprites']['back_default']; ?>" alt="backPoke">
+    <div id="pokeId" class="pokeId"><?php echo $pokeId; ?></div>
+
+    <div id="pokeName" class="pokeName">Name: <?php echo $data['species']['name']; ?></div>
+
     <div class="pokeType-wrapper">
-    <div id="type-one" class="pokeType"><?php echo $pokeTypeOne;?></div>
-    <div id="type-two" class="pokeType"><?php echo $pokeTypeTwo;?></div>
+        <div id="type-one" class="pokeType"><?php echo $pokeTypeOne; ?></div>
+        <div id="type-two" class="pokeType"><?php echo $pokeTypeTwo; ?></div>
     </div>
-    <div id="descrip" class="flavortext"><?php echo $flavorText;?></div>
-<div id="pokeAbility" class="pokeAbility">Special Ability: <?php echo $data['abilities'][0]['ability']['name'];?></div>
-<div class="pokeMove-wrapper">
-    <div id="move-one" class="moves"><?php echo $moves[0]?></div>
-    <div id="move-two" class="moves"><?php echo $moves[1];?></div>
-    <div id="move-three" class="moves"><?php echo $moves[2];?></div>
-    <div id="move-four" class="moves"> <?php echo $moves[3];?></div>
-</div>
-</div>
-<div id="evolutionChain" class="evolutionChain">
-    <!--<img src="?php echo $dataEvo['sprites']['front_default'];?"</div>-->
+
+    <div id="descrip" class="flavortext"><?php echo $flavorText; ?></div>
+
+    <div id="pokeAbility" class="pokeAbility">Special
+        Ability: <?php echo $data['abilities'][0]['ability']['name']; ?></div>
+
+    <div class="pokeMove-wrapper">
+        <div id="move-one" class="moves"><?php echo $moves[0] ?></div>
+        <div id="move-two" class="moves"><?php echo $moves[1]; ?></div>
+        <div id="move-three" class="moves"><?php echo $moves[2]; ?></div>
+        <div id="move-four" class="moves"> <?php echo $moves[3]; ?></div>
+    </div>
+
+    <div class="evolutionChain">
+        <?php echo $evoChainOne;?><br/>
+        <?php echo $evoChainTwo;?>
+    </div>
 </body>
 </html>
 
