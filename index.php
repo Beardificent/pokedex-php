@@ -72,9 +72,10 @@ do {
     }
 
 } while (!!$dataEvoCopy);
-var_dump($evoArr[0]);
-var_dump($evoArr[1]);
-var_dump($evoArr[2]);
+//THIS IS A HARDCODE FIX AND IT DOESNT FIX ANYTHING WHEN YOU THINK ABOUT IT - ECHOED IN HTML BELOW
+$prevEvo = $evoArr[0];
+$currentEvo = $evoArr[1];
+$nextEvo = $evoArr[2];
 
 /*
 for ($i = 0; $i < count($evoArr); $i++) {
@@ -144,8 +145,11 @@ for ($i = 0; $i < 4; $i++) {
         <div id="move-four" class="moves"> <?php echo $moves[3]; ?></div>
     </div>
 
-    <img class="evolutionChain" src=''>
-
+<div class="evolutions">
+    <div class="prevEvo"><?php echo $prevEvo;?></div>
+    <div class="currentEvo"><?php echo $currentEvo;?></div>
+    <div class="nextEvo"><?php echo $nextEvo;?></div>
+</div>
 </body>
 </html>
 
