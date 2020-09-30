@@ -30,7 +30,8 @@ if ($pokemon === null) {
 $getPokemon = file_get_contents('https://pokeapi.co/api/v2/pokemon/' . $pokemon);
 $data = (json_decode($getPokemon, True));
 $pokeTypeOne = $data['types'][0]['type']['name'];
-$pokeTypeTwo = $data['types'][1]['type']['name'];
+//$pokeTypeTwo = $data['types'][1]['type']['name'];
+
 //Attempt to hide typeTwo in case there is none
 /*
 if ($data['types'][1]['type']['name'] === 0){
@@ -51,16 +52,39 @@ if ($data['id'] < 10) {
 }
 
 //Fetch for Flavor text
-$getSpecies = file_get_contents('https://pokeapi.co/api/v2/pokemon-species/' . $pokemon);
+$getSpecies = file_get_contents($data['species']['url']);
 $dataSpecies = (json_decode($getSpecies, True));
 $flavorText = $dataSpecies['flavor_text_entries'][0]['flavor_text'];
 
 //works for bulbasaur (displays next evolution names) but bricks as soon as ivysaur
-$getEvolutions = file_get_contents('https://pokeapi.co/api/v2/evolution-chain/' . $pokemon);
+$getEvolutions = file_get_contents($dataSpecies['evolution_chain']['url']);
 $dataEvo = (json_decode($getEvolutions, True));
+$dataEvoCopy = $dataEvo['chain'];
+$evoArr = array();
 
-$evoChainOne = $dataEvo['chain']['evolves_to'][0]['species']['name'];
+//push evolution data into array while there is an array to add. if not it stops looking. Xander helped me with this one! will look up later!
+do {
+    array_push($evoArr, $dataEvoCopy['species']['name']);
+    if($dataEvoCopy['evolves_to']){
+        $dataEvoCopy = $dataEvoCopy['evolves_to'][0];
+    }else {
+        $dataEvoCopy = null;
+    }
+
+} while (!!$dataEvoCopy);
+
+/*for($x= 0; $x < $evoArr.length; $x++){
+
+}
+*/
+//$evoCount = count($dataEvo['evolves_to']);
+/*
+ * $evoChainOne = $dataEvo['chain']['evolves_to'][0]['species']['name'];
 $evoChainTwo = $dataEvo['chain']['evolves_to'][0]['evolves_to'][0]['species']['name'];
+*/
+
+//$evoSprite = file_get_contents('https://pokeapi.co/api/v2/pokemon/' . $evoChainOne);
+//$evoImage = json_decode($evoSprite, True);
 
 
 //Random moves generator (max 4)
@@ -89,7 +113,7 @@ for ($i = 0; $i < 4; $i++) {
 <body>
 
 <form action="index.php" method="post">
-    Name or Id: <input type="text" name="id">
+    <input type="text" name="id" placeholder="Name or ID number">
     <input type="submit">
 </form>
 
@@ -106,7 +130,7 @@ for ($i = 0; $i < 4; $i++) {
 
     <div class="pokeType-wrapper">
         <div id="pokeType" class="type-one"><?php echo $pokeTypeOne; ?></div>
-        <div id="pokeType" class="type-two"><?php echo $pokeTypeTwo; ?></div>
+        <div id="pokeType" class="type-two"><?php// echo $pokeTypeTwo; ?></div>
     </div>
 
 
@@ -120,10 +144,8 @@ for ($i = 0; $i < 4; $i++) {
         <div id="move-four" class="moves"> <?php echo $moves[3]; ?></div>
     </div>
 
-    <div class="evolutionChain">
-        <?php echo $evoChainOne; ?><br/>
-        <?php echo $evoChainTwo; ?>
-    </div>
+    <img class="evolutionChain" src=''>
+
 </body>
 </html>
 
