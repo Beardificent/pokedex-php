@@ -1,3 +1,56 @@
+html {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.pokeSprite-Wrapper {
+    background-color: whitesmoke;
+    line-height: 20px;
+    max-width: 200px;
+
+}
+
 .pokeInfo {
+    background-color: red;
     text-transform: capitalize;
+}
+
+.pokeId {
+
+}
+
+#pokeName {
+    margin-left: 10px;
+}
+
+.flavortext {
+    text-transform: lowercase;
+    width: 60%;
+    color: whitesmoke;
+    float: right;
+}
+
+.pokeType-wrapper {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.type-one {
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+.type-two {
+
+}
+.pokeAbility-wrapper{
+    margin-left: 10px;
+}
+
+.pokeMove-wrapper{
+    margin-left: 10px;
+}
+.evolutionChain {
+    background-color: whitesmoke;
 }
