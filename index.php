@@ -2,7 +2,6 @@
 
 declare(strict_types=0);
 //DISPLAY ERROR HANDLING
-
 ini_set("display_errors", 1);
 ini_set("display_startup_errors", 1);
 error_reporting(E_ALL);
@@ -29,9 +28,17 @@ if ($pokemon === null) {
 //FETCH POKE API
 
 $getPokemon = file_get_contents('https://pokeapi.co/api/v2/pokemon/' . $pokemon);
-$data = (json_decode($getPokemon, true));
+$data = (json_decode($getPokemon, True));
 $pokeTypeOne = $data['types'][0]['type']['name'];
 $pokeTypeTwo = $data['types'][1]['type']['name'];
+//Attempt to hide typeTwo in case there is none
+/*
+if ($data['types'][1]['type']['name'] === 0){
+    $pokeTypeTwo = " ";
+}else {
+    $pokeTypeTwo = $data['types'][1]['type']['name'];
+}
+*/
 
 //IF STATEMENT TO REPLACE PADSTART(0, 3) for ID NUMBER
 if ($data['id'] < 10) {
@@ -51,11 +58,12 @@ $flavorText = $dataSpecies['flavor_text_entries'][0]['flavor_text'];
 //works for bulbasaur (displays next evolution names) but bricks as soon as ivysaur
 $getEvolutions = file_get_contents('https://pokeapi.co/api/v2/evolution-chain/' . $pokemon);
 $dataEvo = (json_decode($getEvolutions, True));
+
 $evoChainOne = $dataEvo['chain']['evolves_to'][0]['species']['name'];
 $evoChainTwo = $dataEvo['chain']['evolves_to'][0]['evolves_to'][0]['species']['name'];
 
-//Random moves generator (max 4) no idea how to print this value as a single to body. appendchild maybe?
 
+//Random moves generator (max 4)
 $moves = array();
 $maxMoves = count($data['moves']);
 for ($i = 0; $i < 4; $i++) {
@@ -65,6 +73,8 @@ for ($i = 0; $i < 4; $i++) {
 
 
 ?>
+
+
 
 <!doctype html>
 <html lang="en">
