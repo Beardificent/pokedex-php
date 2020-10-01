@@ -23,7 +23,7 @@ $pokemon = "";
 if (isset ($_POST['id'])){
     $pokemon = $_POST['id'];
 }else {
-    $pokemon = 1;
+    $pokemon = 4;
 }
 
 //FETCH POKE API
@@ -32,8 +32,77 @@ $getPokemon = file_get_contents('https://pokeapi.co/api/v2/pokemon/' . $pokemon)
 $data = (json_decode($getPokemon, True));
 $pokeTypesArr = array ();
 $pokeTypeOne = $data['types'][0]['type']['name'];
+$pokeColorOne = getColor($data['types'][0]['type']['name']);
+$pokeColorTwo = "";
+if (isset($data['types'][1]['type']['name'])){
+    $pokeColorTwo = getColor($data['types'][1]['type']['name']);
+} else {
+    $pokeColorTwo = $pokeColorOne;
+}
 
 
+function getColor($type)
+{
+    $color = "";
+    switch ($type) {
+        case "normal":
+            $color = "rgb(186, 186, 174)";
+            break;
+        case "fighting":
+            $color = "rgb(167, 85, 67)";
+            break;
+        case "flying":
+            $color = "rgb(120, 162, 215)";
+            break;
+        case "poison":
+            $color = "rgb(169, 92, 160)";
+            break;
+        case "ground":
+            $color = "rgb(238, 204, 85)";
+            break;
+        case "rock":
+            $color = "rgb(204, 189, 114)";
+            break;
+        case "bug":
+            $color = "rgb(194, 210,30)";
+            break;
+        case "ghost":
+            $color = "rgb(121,117,215)";
+            break;
+        case "steel":
+            $color = "rgb(196, 194,219)";
+            break;
+        case "fire":
+            $color = "rgb(250, 86, 67)";
+            break;
+        case "water":
+            $color = "rgb(86, 173, 255)";
+            break;
+        case "grass":
+            $color = "rgb(140, 215, 80)";
+            break;
+        case "electric":
+            $color = "rgb(253, 225, 57)";
+            break;
+        case "psychic":
+            $color = "rgb(250,101, 180)";
+            break;
+        case "ice":
+            $color = "rgb(150, 241, 255)";
+            break;
+        case "dragon":
+            $color = "rgb(134, 115, 255)";
+            break;
+        case "dark":
+            $color = "rgb(141, 104, 85)";
+            break;
+        case "fairy":
+            $color = "rgb(249, 174, 255)";
+            break;
+
+    }
+    return $color;
+}
 //ATTEMPT TO FOR EACH THE POKETYPES
 /*
 foreach ($data['types'] as $type){
@@ -67,13 +136,13 @@ $getSpecies = file_get_contents($data['species']['url']);
 $dataSpecies = (json_decode($getSpecies, True));
 $flavorText = $dataSpecies['flavor_text_entries'][3]['flavor_text'];
 
-//works for bulbasaur (displays next evolution names) but bricks as soon as ivysaur
+
 $getEvolutions = file_get_contents($dataSpecies['evolution_chain']['url']);
 $dataEvo = (json_decode($getEvolutions, True));
 $dataEvoCopy = $dataEvo['chain'];
 $evoArr = array();
 
-//DOWHILE push evolution data into array while there is an array to add. if not it stops looking. Xander helped me with this one! will look up later!
+//We're pushing the data (names via species) into an array and also ordering via IF that if the array reaches EVOLVES_TO[0], to dive deeper into it until there is no EVOLVES_TO[0]
 do {
     array_push($evoArr, $dataEvoCopy['species']['name']);
     if($dataEvoCopy['evolves_to']){
@@ -133,10 +202,12 @@ for ($i = 0; $i < 4; $i++) {
 </form>
 
 <div class="pokeInfo">
-    <div class="pokeSprite-Wrapper">
+    <div class="pokeSprite-Wrapper" style="background-image: linear-gradient(to right, <?php echo $pokeColorOne . ', ' . $pokeColorTwo; ?>)">
         <div id="pokeId" class="pokeId"><?php echo $pokeId; ?></div>
-        <img src="<?php echo $data['sprites']['front_default']; ?>" alt="frontPoke">
-        <img src="<?php echo $data['sprites']['back_default']; ?>" alt="">
+        <div class="typeColor">
+        <img class ="pokeImg" src="<?php echo $data['sprites']['front_default']; ?>" alt="frontPoke">
+        <img class="pokeImg" src="<?php echo $data['sprites']['back_default']; ?>" alt="">
+        </div>
 
     </div>
     <div id="descrip" class="flavortext">Description: <br/><?php echo $flavorText; ?></div>
@@ -159,7 +230,7 @@ for ($i = 0; $i < 4; $i++) {
         ;?>
     </div>
 
-<div class="evolutions">
+<div class="evolutions" style="background-image: linear-gradient(to right, <?php echo $pokeColorOne . ', ' . $pokeColorTwo; ?>)">
     <?php foreach ($evoArr as $poke){
         $getEvoSpriteUrl = file_get_contents('https://pokeapi.co/api/v2/pokemon/'.$poke);
         $evoSpriteData = json_decode($getEvoSpriteUrl, True);
