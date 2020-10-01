@@ -54,7 +54,7 @@ if ($data['id'] < 10) {
 //Fetch for Flavor text
 $getSpecies = file_get_contents($data['species']['url']);
 $dataSpecies = (json_decode($getSpecies, True));
-$flavorText = $dataSpecies['flavor_text_entries'][0]['flavor_text'];
+$flavorText = $dataSpecies['flavor_text_entries'][3]['flavor_text'];
 
 //works for bulbasaur (displays next evolution names) but bricks as soon as ivysaur
 $getEvolutions = file_get_contents($dataSpecies['evolution_chain']['url']);
@@ -73,10 +73,13 @@ do {
 
 } while (!!$dataEvoCopy);
 //THIS IS A HARDCODE FIX AND IT DOESNT FIX ANYTHING WHEN YOU THINK ABOUT IT - ECHOED IN HTML BELOW
-$prevEvo = $evoArr[0];
-$currentEvo = $evoArr[1];
-$nextEvo = $evoArr[2];
 
+/*
+if (!$prevEvo || !$nextEvo){
+    $prevEvo = " ";
+    $nextEvo = " ";
+}
+*/
 /*
 for ($i = 0; $i < count($evoArr); $i++) {
     echo $evoArr[$i]['species']['name'];
@@ -139,17 +142,21 @@ for ($i = 0; $i < 4; $i++) {
         Ability: <?php echo $data['abilities'][0]['ability']['name']; ?></div>
 
     <div class="pokeMove-wrapper">
-        <div id="move-one" class="moves"><?php echo $moves[0] ?></div>
-        <div id="move-two" class="moves"><?php echo $moves[1]; ?></div>
-        <div id="move-three" class="moves"><?php echo $moves[2]; ?></div>
-        <div id="move-four" class="moves"> <?php echo $moves[3]; ?></div>
+        <?php forEach ($moves as $pokeMove){
+            echo "$pokeMove<br/>";
+        }
+        ;?>
     </div>
 
 <div class="evolutions">
-    <div class="prevEvo"><?php echo $prevEvo;?></div>
-    <div class="currentEvo"><?php echo $currentEvo;?></div>
-    <div class="nextEvo"><?php echo $nextEvo;?></div>
+    <?php foreach ($evoArr as $poke){
+        echo "$poke<br/>";
+        $getEvoSpriteUrl = file_get_contents('https://pokeapi.co/api/v2/pokemon/'.$poke);
+        $evoSpriteData = json_decode($getEvoSpriteUrl, True);
+        ?> <img src="<?php echo $evoSpriteData['sprites']['front_default'];?>" <?php
+
+    }
+    ;?>
 </div>
 </body>
 </html>
-
