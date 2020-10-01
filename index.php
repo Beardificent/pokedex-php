@@ -152,23 +152,6 @@ do {
     }
 
 } while (!!$dataEvoCopy);
-//THIS IS A HARDCODE FIX AND IT DOESNT FIX ANYTHING WHEN YOU THINK ABOUT IT - ECHOED IN HTML BELOW
-
-/*
-if (!$prevEvo || !$nextEvo){
-    $prevEvo = " ";
-    $nextEvo = " ";
-}
-*/
-/*
-for ($i = 0; $i < count($evoArr); $i++) {
-    echo $evoArr[$i]['species']['name'];
-}
-
-$evoChainOne = $dataEvo['chain']['evolves_to'][0]['species']['name'];
-$evoChainTwo = $dataEvo['chain']['evolves_to'][0]['evolves_to'][0]['species']['name'];
-*/
-
 
 
 //Random moves generator (max 4)
@@ -183,7 +166,106 @@ for ($i = 0; $i < 4; $i++) {
 ?>
 
 
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Pokedex</title>
+</head>
+<body>
 
+
+
+<div class="pokedex">
+    <div class="left-container">
+        <div class="left-container__top-section">
+            <div class="top-section__blue"></div>
+            <div class="top-section__small-buttons">
+                <div class="top-section__red"></div>
+                <div class="top-section__yellow"></div>
+                <div class="top-section__green"></div>
+            </div>
+        </div>
+        <div class="left-container__main-section-container">
+            <div class="left-container__main-section">
+                <div class="main-section__white" style="background-image: linear-gradient(to right, <?php echo $pokeColorOne . ', ' . $pokeColorTwo; ?>)">
+                    <div class="main-section__black">
+                        <div class="main-screen" >
+                            <div class="screen__header" >
+                                <span class="poke-name"><?php echo $data['species']['name']; ?></span>
+                                <span class="poke-id"><?php echo $pokeId; ?></span>
+                            </div>
+                            <div class="screen__image" >
+                                <img class ="pokeImg" src="<?php echo $data['sprites']['front_default']; ?>" alt="frontPoke">
+                                <img class="pokeImg" src="<?php echo $data['sprites']['back_default']; ?>" alt="">
+                            </div>
+                            <div class="screen__description">
+                                <div class="stats__types">
+                                    <span class="poke-type-one"></span>
+                                    <span class="poke-type-two"></span>
+                                </div>
+                                <div class="screen__stats">
+                                    <?php forEach ($moves as $pokeMove){
+                                        echo "$pokeMove<br/>";
+                                    }
+                                    ;?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="left-container__controllers">
+                    <div class="controllers__d-pad">
+                        <div class="d-pad__cell top "></div>
+                        <button class="d-pad__cell left "></button>
+                        <div class="d-pad__cell middle"></div>
+                        <button class="d-pad__cell right"></button>
+                        <div class="d-pad__cell bottom"></div>
+                    </div>
+                    <div class="controllers__buttons">
+                        <button id ="bButton" name="bButton" type="submit" class="buttons__button">B</button>
+                        <button id ="aButton" name="aButton" type="submit" class="buttons__button">A</button>
+                    </div>
+                </div>
+            </div>
+            <div class="left-container__right">
+                <div class="left-container__hinge"></div>
+                <div class="left-container__hinge"></div>
+            </div>
+        </div>
+    </div>
+    <div class="right-container">
+        <div class="right-container__black">
+            <div class="right-container__screen">
+                <?php echo $flavorText; ?>
+            </div>
+            <div class="right-container__screen ">
+                <?php foreach ($evoArr as $poke){
+                    $getEvoSpriteUrl = file_get_contents('https://pokeapi.co/api/v2/pokemon/'.$poke);
+                    $evoSpriteData = json_decode($getEvoSpriteUrl, True);
+                    ?> <img width="72" height="72" src="<?php echo $evoSpriteData['sprites']['front_default'];?>"> <?php
+
+                }
+                ;?>
+            </div>
+        </div>
+        <form action="index.php" method="post">
+            <input type="text" name="id" placeholder="Name or ID number">
+        </form>
+        <div class="right-container__buttons">
+            <!--   <div class="left-button">Prev</div>
+               <div class="right-button">Next</div>-->
+        </div>
+    </div>
+</div>
+</body>
+
+<!--ORIGINAL HTML BEFORE TAKING IT FROM JS DEX-->
+<!--<?php /*
 <!doctype html>
 <html lang="en">
 <head>
@@ -241,3 +323,4 @@ for ($i = 0; $i < 4; $i++) {
 </div>
 </body>
 </html>
+*/;?>-->
