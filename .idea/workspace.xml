@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8bc2ea9a-9571-46e8-b5eb-58d8d6694123" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpDebugGeneral" listening_started="true" />
+  <component name="PhpServers">
+    <servers>
+      <server host="pokedex.local" id="2517670a-158e-4103-99e5-668a86b07213" name="pokedex.local" />
+    </servers>
+  </component>
+  <component name="ProjectId" id="1iB07ZDnyoLB9eeI9iz9h1AtCta" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$USER_HOME$/becode/pokedex" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8bc2ea9a-9571-46e8-b5eb-58d8d6694123" name="Default Changelist" comment="" />
+      <created>1601365510317</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601365510317</updated>
+      <workItem from="1601365511348" duration="1694000" />
+      <workItem from="1601367225476" duration="11048000" />
+      <workItem from="1601383124583" duration="15478000" />
+      <workItem from="1601409937748" duration="3445000" />
+      <workItem from="1601449015839" duration="13450000" />
+      <workItem from="1601466100032" duration="30173000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="308" y="41" width="800" height="719" key="#Plugins" timestamp="1601466065938">
+      <screen x="60" y="27" width="1306" height="741" />
+    </state>
+    <state x="308" y="41" width="800" height="719" key="#Plugins/60.27.1306.741@60.27.1306.741" timestamp="1601466065938" />
+    <state x="496" y="155" width="424" height="491" key="FileChooserDialogImpl" timestamp="1601457204142">
+      <screen x="60" y="27" width="1306" height="741" />
+    </state>
+    <state x="496" y="155" width="424" height="491" key="FileChooserDialogImpl/60.27.1306.741@60.27.1306.741" timestamp="1601457204142" />
+    <state x="403" y="107" width="620" height="580" key="find.popup" timestamp="1601461754264">
+      <screen x="60" y="27" width="1306" height="741" />
+    </state>
+    <state x="403" y="107" width="620" height="580" key="find.popup/60.27.1306.741@60.27.1306.741" timestamp="1601461754264" />
+    <state x="377" y="174" key="run.anything.popup" timestamp="1601451511445">
+      <screen x="60" y="27" width="1306" height="741" />
+    </state>
+    <state x="377" y="174" key="run.anything.popup/60.27.1306.741@60.27.1306.741" timestamp="1601451511445" />
+    <state x="376" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1601468615713">
+      <screen x="60" y="27" width="1306" height="741" />
+    </state>
+    <state x="376" y="89" width="672" height="678" key="search.everywhere.popup/60.27.1306.741@60.27.1306.741" timestamp="1601468615713" />
+  </component>
+</project>
