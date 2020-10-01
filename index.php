@@ -150,10 +150,9 @@ for ($i = 0; $i < 4; $i++) {
 
 <div class="evolutions">
     <?php foreach ($evoArr as $poke){
-        echo "$poke<br/>";
         $getEvoSpriteUrl = file_get_contents('https://pokeapi.co/api/v2/pokemon/'.$poke);
         $evoSpriteData = json_decode($getEvoSpriteUrl, True);
-        ?> <img src="<?php echo $evoSpriteData['sprites']['front_default'];?>" <?php
+        ?> <img src="<?php echo $evoSpriteData['sprites']['front_default'];?>"> <?php
 
     }
     ;?>
