@@ -32,6 +32,12 @@ $getPokemon = file_get_contents('https://pokeapi.co/api/v2/pokemon/' . $pokemon)
 $data = (json_decode($getPokemon, True));
 $pokeTypesArr = array ();
 $pokeTypeOne = $data['types'][0]['type']['name'];
+$pokeTypeTwo = " ";
+if(isset($data['types'][1]['type']['name'])){
+    $pokeTypeTwo = $data['types'][1]['type']['name'];
+} else {
+    $pokeTypeTwo = " ";
+}
 $pokeColorOne = getColor($data['types'][0]['type']['name']);
 $pokeColorTwo = "";
 if (isset($data['types'][1]['type']['name'])){
@@ -110,7 +116,7 @@ foreach ($data['types'] as $type){
     var_dump($pokeTypesArr);
 }
 */
-//$pokeTypeTwo = $data['types'][1]['type']['name'];
+//
 
 //Attempt to hide typeTwo in case there is none
 /*
@@ -205,8 +211,8 @@ for ($i = 0; $i < 4; $i++) {
                             </div>
                             <div class="screen__description">
                                 <div class="stats__types">
-                                    <span class="poke-type-one"></span>
-                                    <span class="poke-type-two"></span>
+                                    <span class="poke-type-one"><?php echo $pokeTypeOne; ?></span>
+                                    <span class="poke-type-two"><?php echo $pokeTypeTwo; ?></span>
                                 </div>
                                 <div class="screen__stats">
                                     <?php forEach ($moves as $pokeMove){
