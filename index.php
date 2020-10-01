@@ -29,7 +29,17 @@ if ($pokemon === null) {
 
 $getPokemon = file_get_contents('https://pokeapi.co/api/v2/pokemon/' . $pokemon);
 $data = (json_decode($getPokemon, True));
+$pokeTypesArr = array ();
 $pokeTypeOne = $data['types'][0]['type']['name'];
+
+
+//ATTEMPT TO FOR EACH THE POKETYPES
+/*
+foreach ($data['types'] as $type){
+    array_push($pokeTypesArr, $type);
+    var_dump($pokeTypesArr);
+}
+*/
 //$pokeTypeTwo = $data['types'][1]['type']['name'];
 
 //Attempt to hide typeTwo in case there is none
@@ -125,7 +135,7 @@ for ($i = 0; $i < 4; $i++) {
     <div class="pokeSprite-Wrapper">
         <div id="pokeId" class="pokeId"><?php echo $pokeId; ?></div>
         <img src="<?php echo $data['sprites']['front_default']; ?>" alt="frontPoke">
-        <img src="<?php echo $data['sprites']['back_default']; ?>" alt="backPoke">
+        <img src="<?php echo $data['sprites']['back_default']; ?>" alt="">
 
     </div>
     <div id="descrip" class="flavortext">Description: <br/><?php echo $flavorText; ?></div>
