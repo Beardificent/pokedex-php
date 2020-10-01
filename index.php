@@ -18,10 +18,11 @@ $dom->loadHTML('filename.html');
 $dom->preserveWhiteSpace = false;
 */
 
-$pokemon = $_POST['id'];
+$pokemon = "";
 
-
-if ($pokemon === null) {
+if (isset ($_POST['id'])){
+    $pokemon = $_POST['id'];
+}else {
     $pokemon = 1;
 }
 
@@ -105,7 +106,7 @@ $evoChainTwo = $dataEvo['chain']['evolves_to'][0]['evolves_to'][0]['species']['n
 $moves = array();
 $maxMoves = count($data['moves']);
 for ($i = 0; $i < 4; $i++) {
-    $rand = floor(rand(0, $maxMoves));
+    $rand = floor(rand(0, $maxMoves -1));
     array_push($moves, $data['moves'][$rand]['move']['name']);
 }
 
