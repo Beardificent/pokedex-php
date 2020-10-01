@@ -134,7 +134,7 @@ if ($data['id'] < 10) {
 //Fetch for Flavor text
 $getSpecies = file_get_contents($data['species']['url']);
 $dataSpecies = (json_decode($getSpecies, True));
-$flavorText = $dataSpecies['flavor_text_entries'][3]['flavor_text'];
+$flavorText = $dataSpecies['flavor_text_entries'][4]['flavor_text'];
 
 
 $getEvolutions = file_get_contents($dataSpecies['evolution_chain']['url']);
