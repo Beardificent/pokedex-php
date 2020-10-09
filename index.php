@@ -33,6 +33,22 @@ $startCount = 10;
 $offSet = 0;
 $listItems = file_get_contents('https://pokeapi.co/api/v2/pokemon?offset=' . $offSet . '&limit='. $startCount);
 $itemData = (json_decode($listItems, True));
+
+//You can also use the foreach method to print it out the array like below,
+//i've chosen not to atm because of my styling.
+$pokeList = array();
+$listTotal = count($itemData['results']);
+for ($i = 0; $i <= $listTotal; $i++) {
+    array_push($pokeList, $itemData['results'][$i]['name']);
+}
+
+// required foreach method would be
+/*
+foreach ($pokeList as $pokeMonster){
+    echo $pokeMonster;
+}
+*/
+
 if (!isset($_POST['prev'])) {
     $startCount = 10;
     $offSet = 0;
@@ -210,7 +226,9 @@ for ($i = 0; $i < 4; $i++) {
     <div class="test-container">
         <div class="test-container__black">
             <div class="test-container__screen">
-                <div class="list-item"> <?php echo $itemData['results'][0]['name']; ?></div>
+                <div class="list-item"> <?php foreach ($pokeList as $pokeMonster) {
+                        echo "$pokeMonster<br/>";
+                    }; ?></div>
                 <div class="list-item"> <?php echo $itemData['results'][1]['name']; ?></div>
                 <div class="list-item"> <?php echo $itemData['results'][2]['name']; ?></div>
                 <div class="list-item"> <?php echo $itemData['results'][3]['name']; ?></div>
