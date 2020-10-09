@@ -20,27 +20,38 @@ $dom->preserveWhiteSpace = false;
 
 $pokemon = "";
 
-if (isset ($_POST['id'])){
+if (isset ($_POST['id'])) {
     $pokemon = $_POST['id'];
-}else {
+} else {
     $pokemon = 4;
 }
 
+//fetch list items
+$listItems = file_get_contents('https://pokeapi.co/api/v2/pokemon?offset=0&limit=10');
+$itemData = (json_decode($listItems, True));
+/*
+$listPokes = array ();
+$listTotal = count($itemData['results']);
+for ($i = 0; $i < $listTotal; $i++) {
+    array_push($listPokes, $itemData['results']['name']);
+}
+var_dump($listPokes);
+*/
 //FETCH POKE API
 
 $getPokemon = file_get_contents('https://pokeapi.co/api/v2/pokemon/' . $pokemon);
 $data = (json_decode($getPokemon, True));
-$pokeTypesArr = array ();
+$pokeTypesArr = array();
 $pokeTypeOne = $data['types'][0]['type']['name'];
 $pokeTypeTwo = " ";
-if(isset($data['types'][1]['type']['name'])){
+if (isset($data['types'][1]['type']['name'])) {
     $pokeTypeTwo = $data['types'][1]['type']['name'];
 } else {
     $pokeTypeTwo = " ";
 }
 $pokeColorOne = getColor($data['types'][0]['type']['name']);
 $pokeColorTwo = "";
-if (isset($data['types'][1]['type']['name'])){
+if (isset($data['types'][1]['type']['name'])) {
     $pokeColorTwo = getColor($data['types'][1]['type']['name']);
 } else {
     $pokeColorTwo = $pokeColorOne;
@@ -109,23 +120,7 @@ function getColor($type)
     }
     return $color;
 }
-//ATTEMPT TO FOR EACH THE POKETYPES
-/*
-foreach ($data['types'] as $type){
-    array_push($pokeTypesArr, $type);
-    var_dump($pokeTypesArr);
-}
-*/
-//
 
-//Attempt to hide typeTwo in case there is none
-/*
-if ($data['types'][1]['type']['name'] === 0){
-    $pokeTypeTwo = " ";
-}else {
-    $pokeTypeTwo = $data['types'][1]['type']['name'];
-}
-*/
 
 //IF STATEMENT TO REPLACE PADSTART(0, 3) for ID NUMBER
 if ($data['id'] < 10) {
@@ -136,6 +131,7 @@ if ($data['id'] < 10) {
 } else {
     $pokeId = "#" . $data['id'];
 }
+
 
 //Fetch for Flavor text
 $getSpecies = file_get_contents($data['species']['url']);
@@ -151,9 +147,9 @@ $evoArr = array();
 //We're pushing the data (names via species) into an array and also ordering via IF that if the array reaches EVOLVES_TO[0], to dive deeper into it until there is no EVOLVES_TO[0]
 do {
     array_push($evoArr, $dataEvoCopy['species']['name']);
-    if($dataEvoCopy['evolves_to']){
+    if ($dataEvoCopy['evolves_to']) {
         $dataEvoCopy = $dataEvoCopy['evolves_to'][0];
-    }else {
+    } else {
         $dataEvoCopy = null;
     }
 
@@ -164,7 +160,7 @@ do {
 $moves = array();
 $maxMoves = count($data['moves']);
 for ($i = 0; $i < 4; $i++) {
-    $rand = floor(rand(0, $maxMoves -1));
+    $rand = floor(rand(0, $maxMoves - 1));
     array_push($moves, $data['moves'][$rand]['move']['name']);
 }
 
@@ -185,34 +181,25 @@ for ($i = 0; $i < 4; $i++) {
 <body>
 
 
-
 <div class="pokedex">
+
     <div class="test-container">
         <div class="test-container__black">
             <div class="test-container__screen">
-                <div class="list-item"></div>
-                <div class="list-item"></div>
-                <div class="list-item"></div>
-                <div class="list-item"></div>
-                <div class="list-item"></div>
-                <div class="list-item"></div>
-                <div class="list-item"></div>
-                <div class="list-item"></div>
-                <div class="list-item"></div>
-                <div class="list-item"></div>
-                <!-- <div class="list-item"></div>
-                 <div class="list-item"></div>
-                 <div class="list-item"></div>
-                 <div class="list-item"></div>
-                 <div class="list-item"></div>
-                 <div class="list-item"></div>
-                 <div class="list-item"></div>
-                 <div class="list-item"></div>
-                 <div class="list-item"></div>
-                 <div class="list-item"></div>-->
+                <div class="list-item"> <?php echo $itemData['results'][0]['name']; ;?></div>
+                <div class="list-item"> <?php echo $itemData['results'][1]['name']; ;?></div>
+                <div class="list-item"> <?php echo $itemData['results'][2]['name']; ;?></div>
+                <div class="list-item"> <?php echo $itemData['results'][3]['name']; ;?></div>
+                <div class="list-item"> <?php echo $itemData['results'][4]['name']; ;?></div>
+                <div class="list-item"> <?php echo $itemData['results'][5]['name']; ;?></div>
+                <div class="list-item"> <?php echo $itemData['results'][6]['name']; ;?></div>
+                <div class="list-item"> <?php echo $itemData['results'][7]['name']; ;?></div>
+                <div class="list-item"> <?php echo $itemData['results'][8]['name']; ;?></div>
+                <div class="list-item"> <?php echo $itemData['results'][9]['name']; ;?></div>
             </div>
         </div>
     </div>
+
     <div class="left-container">
         <div class="left-container__top-section">
             <div class="top-section__blue"></div>
@@ -230,15 +217,17 @@ for ($i = 0; $i < 4; $i++) {
                 <div class="side-container__hinge"></div>
             </div>
             <div class="left-container__main-section">
-                <div class="main-section__white" style="background-image: linear-gradient(to right, <?php echo $pokeColorOne . ', ' . $pokeColorTwo; ?>)">
+                <div class="main-section__white"
+                     style="background-image: linear-gradient(to right, <?php echo $pokeColorOne . ', ' . $pokeColorTwo; ?>)">
                     <div class="main-section__black">
-                        <div class="main-screen" >
-                            <div class="screen__header" >
+                        <div class="main-screen">
+                            <div class="screen__header">
                                 <span class="poke-name"><?php echo $data['species']['name']; ?></span>
                                 <span class="poke-id"><?php echo $pokeId; ?></span>
                             </div>
-                            <div class="screen__image" >
-                                <img class ="pokeImg" src="<?php echo $data['sprites']['front_default']; ?>" alt="frontPoke">
+                            <div class="screen__image">
+                                <img class="pokeImg" src="<?php echo $data['sprites']['front_default']; ?>"
+                                     alt="frontPoke">
                                 <img class="pokeImg" src="<?php echo $data['sprites']['back_default']; ?>" alt="">
                             </div>
                             <div class="screen__description">
@@ -247,10 +236,9 @@ for ($i = 0; $i < 4; $i++) {
                                     <span class="poke-type-two"><?php echo $pokeTypeTwo; ?></span>
                                 </div>
                                 <div class="screen__stats">
-                                    <?php forEach ($moves as $pokeMove){
+                                    <?php foreach ($moves as $pokeMove) {
                                         echo "$pokeMove<br/>";
-                                    }
-                                    ;?>
+                                    }; ?>
                                 </div>
                             </div>
                         </div>
@@ -265,8 +253,8 @@ for ($i = 0; $i < 4; $i++) {
                         <div class="d-pad__cell bottom"></div>
                     </div>
                     <div class="controllers__buttons">
-                        <button id ="bButton" name="bButton" type="submit" class="buttons__button">B</button>
-                        <button id ="aButton" name="aButton" type="submit" class="buttons__button">A</button>
+                        <button id="bButton" name="bButton" type="submit" class="buttons__button">B</button>
+                        <button id="aButton" name="aButton" type="submit" class="buttons__button">A</button>
                     </div>
                 </div>
             </div>
@@ -282,17 +270,17 @@ for ($i = 0; $i < 4; $i++) {
                 <?php echo $flavorText; ?>
             </div>
             <div class="right-container__screen ">
-                <?php foreach ($evoArr as $poke){
-                    $getEvoSpriteUrl = file_get_contents('https://pokeapi.co/api/v2/pokemon/'.$poke);
+                <?php foreach ($evoArr as $poke) {
+                    $getEvoSpriteUrl = file_get_contents('https://pokeapi.co/api/v2/pokemon/' . $poke);
                     $evoSpriteData = json_decode($getEvoSpriteUrl, True);
-                    ?> <img width="72" height="72" src="<?php echo $evoSpriteData['sprites']['front_default'];?>"> <?php
+                    ?> <img width="72" height="72"
+                            src="<?php echo $evoSpriteData['sprites']['front_default']; ?>"> <?php
 
-                }
-                ;?>
+                }; ?>
             </div>
         </div>
         <form action="index.php" class="input_wrapper" method="post">
-            <input type="text" name="id"  class="input" placeholder="Name or ID number">
+            <input type="text" name="id" class="input" placeholder="Name or ID number">
         </form>
         <div class="right-container__buttons">
             <!--   <div class="left-button">Prev</div>
@@ -302,63 +290,4 @@ for ($i = 0; $i < 4; $i++) {
 </div>
 </body>
 
-<!--ORIGINAL HTML BEFORE TAKING IT FROM JS DEX-->
-<!--<?php /*
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
-    <title>Dex PHP</title>
-</head>
-<body>
 
-<form action="index.php" method="post">
-    <input type="text" name="id" placeholder="Name or ID number">
-    <input type="submit">
-</form>
-
-<div class="pokeInfo">
-    <div class="pokeSprite-Wrapper" style="background-image: linear-gradient(to right, <?php echo $pokeColorOne . ', ' . $pokeColorTwo; ?>)">
-        <div id="pokeId" class="pokeId"><?php echo $pokeId; ?></div>
-        <div class="typeColor">
-        <img class ="pokeImg" src="<?php echo $data['sprites']['front_default']; ?>" alt="frontPoke">
-        <img class="pokeImg" src="<?php echo $data['sprites']['back_default']; ?>" alt="">
-        </div>
-
-    </div>
-    <div id="descrip" class="flavortext">Description: <br/><?php echo $flavorText; ?></div>
-
-    <div id="pokeName" class="pokeName">Name: <?php echo $data['species']['name']; ?></div>
-
-    <div class="pokeType-wrapper">
-        <div id="pokeType" class="type-one"><?php echo $pokeTypeOne; ?></div>
-        <div id="pokeType" class="type-two"><?php// echo $pokeTypeTwo; ?></div>
-    </div>
-
-
-    <div id="pokeAbility" class="pokeAbility-wrapper">Special
-        Ability: <?php echo $data['abilities'][0]['ability']['name']; ?></div>
-
-    <div class="pokeMove-wrapper">
-        <?php forEach ($moves as $pokeMove){
-            echo "$pokeMove<br/>";
-        }
-        ;?>
-    </div>
-
-<div class="evolutions" style="background-image: linear-gradient(to right, <?php echo $pokeColorOne . ', ' . $pokeColorTwo; ?>)">
-    <?php foreach ($evoArr as $poke){
-        $getEvoSpriteUrl = file_get_contents('https://pokeapi.co/api/v2/pokemon/'.$poke);
-        $evoSpriteData = json_decode($getEvoSpriteUrl, True);
-        ?> <img src="<?php echo $evoSpriteData['sprites']['front_default'];?>"> <?php
-
-    }
-    ;?>
-</div>
-</body>
-</html>
-*/;?>-->

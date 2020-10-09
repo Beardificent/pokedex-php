@@ -306,6 +306,7 @@ body {
 
 .buttons__button {
     align-items: center;
+    cursor: pointer;
     background: black;
     border-radius: 50%;
     border: 1px solid dimgrey;
