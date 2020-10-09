@@ -6,6 +6,7 @@ ini_set("display_errors", 1);
 ini_set("display_startup_errors", 1);
 error_reporting(E_ALL);
 
+session_start();
 
 /*
 // a new dom object
@@ -18,6 +19,7 @@ $dom->loadHTML('filename.html');
 $dom->preserveWhiteSpace = false;
 */
 
+
 $pokemon = "";
 
 if (isset ($_POST['id'])) {
@@ -27,8 +29,30 @@ if (isset ($_POST['id'])) {
 }
 
 //fetch list items
-$listItems = file_get_contents('https://pokeapi.co/api/v2/pokemon?offset=0&limit=10');
+$startCount = 10;
+$offSet = 0;
+$listItems = file_get_contents('https://pokeapi.co/api/v2/pokemon?offset=' . $offSet . '&limit='. $startCount);
 $itemData = (json_decode($listItems, True));
+if (!isset($_POST['prev'])) {
+    $startCount = 10;
+    $offSet = 0;
+} else {
+    $startCount -= 10;
+    $offSet -= 10;
+}
+
+if(isset($_POST['next'])) {
+    $startCount += 10;
+    $offSet += 10;
+}
+
+/*
+if (isset($_POST['button2'])) {
+    $startCount += 10;
+}
+*/
+
+
 /*
 $listPokes = array ();
 $listTotal = count($itemData['results']);
@@ -186,18 +210,24 @@ for ($i = 0; $i < 4; $i++) {
     <div class="test-container">
         <div class="test-container__black">
             <div class="test-container__screen">
-                <div class="list-item"> <?php echo $itemData['results'][0]['name']; ;?></div>
-                <div class="list-item"> <?php echo $itemData['results'][1]['name']; ;?></div>
-                <div class="list-item"> <?php echo $itemData['results'][2]['name']; ;?></div>
-                <div class="list-item"> <?php echo $itemData['results'][3]['name']; ;?></div>
-                <div class="list-item"> <?php echo $itemData['results'][4]['name']; ;?></div>
-                <div class="list-item"> <?php echo $itemData['results'][5]['name']; ;?></div>
-                <div class="list-item"> <?php echo $itemData['results'][6]['name']; ;?></div>
-                <div class="list-item"> <?php echo $itemData['results'][7]['name']; ;?></div>
-                <div class="list-item"> <?php echo $itemData['results'][8]['name']; ;?></div>
-                <div class="list-item"> <?php echo $itemData['results'][9]['name']; ;?></div>
+                <div class="list-item"> <?php echo $itemData['results'][0]['name']; ?></div>
+                <div class="list-item"> <?php echo $itemData['results'][1]['name']; ?></div>
+                <div class="list-item"> <?php echo $itemData['results'][2]['name']; ?></div>
+                <div class="list-item"> <?php echo $itemData['results'][3]['name']; ?></div>
+                <div class="list-item"> <?php echo $itemData['results'][4]['name']; ?></div>
+                <div class="list-item"> <?php echo $itemData['results'][5]['name']; ?></div>
+                <div class="list-item"> <?php echo $itemData['results'][6]['name']; ?></div>
+                <div class="list-item"> <?php echo $itemData['results'][7]['name']; ?></div>
+                <div class="list-item"> <?php echo $itemData['results'][8]['name']; ?></div>
+                <div class="list-item"> <?php echo $itemData['results'][9]['name']; ?></div>
             </div>
         </div>
+        <form method="post">
+            <input type="submit" class="linkButtonPrev" name="prev"
+                   value="prev"/>
+            <input type="submit" class="linkButtonNext" name="next"
+                   value="next"/>
+        </form>
     </div>
 
     <div class="left-container">
@@ -288,6 +318,7 @@ for ($i = 0; $i < 4; $i++) {
         </div>
     </div>
 </div>
+<!-- <script src="main.js"></script> -->
 </body>
 
 
