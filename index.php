@@ -187,6 +187,32 @@ for ($i = 0; $i < 4; $i++) {
 
 
 <div class="pokedex">
+    <div class="test-container">
+        <div class="test-container__black">
+            <div class="test-container__screen">
+                <div class="list-item"></div>
+                <div class="list-item"></div>
+                <div class="list-item"></div>
+                <div class="list-item"></div>
+                <div class="list-item"></div>
+                <div class="list-item"></div>
+                <div class="list-item"></div>
+                <div class="list-item"></div>
+                <div class="list-item"></div>
+                <div class="list-item"></div>
+                <!-- <div class="list-item"></div>
+                 <div class="list-item"></div>
+                 <div class="list-item"></div>
+                 <div class="list-item"></div>
+                 <div class="list-item"></div>
+                 <div class="list-item"></div>
+                 <div class="list-item"></div>
+                 <div class="list-item"></div>
+                 <div class="list-item"></div>
+                 <div class="list-item"></div>-->
+            </div>
+        </div>
+    </div>
     <div class="left-container">
         <div class="left-container__top-section">
             <div class="top-section__blue"></div>
@@ -196,7 +222,13 @@ for ($i = 0; $i < 4; $i++) {
                 <div class="top-section__green"></div>
             </div>
         </div>
+
         <div class="left-container__main-section-container">
+
+            <div class="side-container__right">
+                <div class="side-container__hinge"></div>
+                <div class="side-container__hinge"></div>
+            </div>
             <div class="left-container__main-section">
                 <div class="main-section__white" style="background-image: linear-gradient(to right, <?php echo $pokeColorOne . ', ' . $pokeColorTwo; ?>)">
                     <div class="main-section__black">
@@ -259,8 +291,8 @@ for ($i = 0; $i < 4; $i++) {
                 ;?>
             </div>
         </div>
-        <form action="index.php" method="post">
-            <input type="text" name="id" placeholder="Name or ID number">
+        <form action="index.php" class="input_wrapper" method="post">
+            <input type="text" name="id"  class="input" placeholder="Name or ID number">
         </form>
         <div class="right-container__buttons">
             <!--   <div class="left-button">Prev</div>
